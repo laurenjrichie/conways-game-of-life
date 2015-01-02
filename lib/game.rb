@@ -83,7 +83,7 @@ class GameOfLife
       end
       next_gen << new_row
     end
-    next_gen
+    @grid = next_gen
   end
 
 end
