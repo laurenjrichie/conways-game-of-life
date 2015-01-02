@@ -1,5 +1,7 @@
 class GameOfLife
-  def grid
+  attr_reader :grid
+
+  def initialize
     @grid = [
       ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
@@ -12,6 +14,16 @@ class GameOfLife
       ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
     ]
+  end
+
+  def seed(live_cells)
+    grid = @grid
+    while grid.flatten.count("O") < live_cells
+      row = rand(0..9)
+      grid[row][0] = "O"
+      grid[row] = grid[row].sort_by {rand}
+    end
+    grid
   end
 
 end
