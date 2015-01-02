@@ -62,12 +62,12 @@ describe GameOfLife do
 
     expect(@game.neighbors(row, column)).to eq(["-", "O", "-", "O", "O", "-", "O", "-"])
       # [
+      #   ["O", "O", "-", "-", "-", "-", "-", "-", "-", "-",],
+      #   ["O", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "O", "O", "O", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "-", "O", "-", "-", "-", "-",],
+      #   ["-", "-", "-", "-", "-", "-", "-", "-", "0", "0",],
+      #   ["-", "-", "-", "-", "_", "_", "_", "-", "-", "X",],
+      #   ["-", "-", "-", "-", "-", "_", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
@@ -75,7 +75,15 @@ describe GameOfLife do
       # ]
   end
 
-  it 'finding neighbors deals with edge cases'
+  it 'finding neighbors deals with edge cases' do
+    @game.custom_seed(0,1)
+    @game.custom_seed(1,0)
+    @game.custom_seed(3,9)
+    @game.custom_seed(3,10)
+
+    expect(@game.neighbors(0,0).count("O")).to eq(2)
+    expect(@game.neighbors(4,10).count("O")).to eq(2)
+  end
 
 
   it 'any live cell with fewer than two live neighbors dies' do
@@ -113,6 +121,8 @@ describe GameOfLife do
 
     expect(@game.live_or_die?(5, 4)).to eq("live")
   end
+
+  it 'moves to the next generation and applies the live or die method to each cell'
 
 
 end
