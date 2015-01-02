@@ -75,10 +75,18 @@ describe GameOfLife do
       # ]
   end
 
-  it 'has a method to find vertical neighbors'
+  it 'any live cell with fewer than two live neighbors dies' do
+    @game.custom_seed(4,4)
+    @game.custom_seed(4,5)
 
-  it 'has a method to find diagonal neighbors'
+    expect(@game.live_or_die?(4, 5)).to eq("die")
+  end
 
-  it 'has a method to find all neighbors'
+  it 'any live cell with more than three live neighbors dies'
+
+  it 'any live cell with two or three live neighbors lives'
+
+  it 'any dead cell with exactly three live neighbors comes to life'
+
 
 end

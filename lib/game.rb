@@ -44,4 +44,23 @@ class GameOfLife
     neighbors.push(top_left, top, top_right, left, right, bottom_left, bottom, bottom_right)
   end
 
+  def live_or_die?(row, column)
+    cell = @grid[row][column]
+    live_neighbors = neighbors(row, column).count("O")
+    if cell == "O"
+      if live_neighbors < 2 || live_neighbors > 3
+        fate = "die"
+      elsif live_neighbors == 2 || live_neighbors == 3
+        fate = "live"
+      end
+    elsif cell == "-"
+      if live_neighbors == 3
+        fate = "live"
+      else
+        fate = "die"
+      end
+    end
+    fate
+  end
+
 end
