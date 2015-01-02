@@ -32,14 +32,18 @@ class GameOfLife
 
   def neighbors(row, column)
     neighbors = []
-    top_left = @grid[row-1][column-1]
-    top = @grid[row-1][column]
-    top_right = @grid[row-1][column+1]
-    left = @grid[row][column-1]
-    right = @grid[row][column+1]
-    bottom_left = @grid[row+1][column-1]
-    bottom = @grid[row+1][column]
-    bottom_right = @grid[row+1][column+1]
+    if row != 0
+      top_left = @grid[row-1][column-1]
+      top = @grid[row-1][column]
+      top_right = @grid[row-1][column+1]
+    end
+    left = @grid[row][column-1] unless column == 0
+    right = @grid[row][column+1] unless column == 9
+    if row != 9
+      bottom_left = @grid[row+1][column-1]
+      bottom = @grid[row+1][column]
+      bottom_right = @grid[row+1][column+1]
+    end
 
     neighbors.push(top_left, top, top_right, left, right, bottom_left, bottom, bottom_right)
   end
@@ -61,6 +65,25 @@ class GameOfLife
       end
     end
     fate
+  end
+
+  def next_gen
+    next_gen = []
+    @grid.each_with_index do |row, index|
+      row_number = index
+      new_row = []
+      row.each_with_index do |cell, index|
+        column_number = index
+        fate = live_or_die?(row_number, column_number)
+        if fate == "live"
+          new_row << "O"
+        elsif fate == "die"
+          new_row << "-"
+        end
+      end
+      next_gen << new_row
+    end
+    next_gen
   end
 
 end
