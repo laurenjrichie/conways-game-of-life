@@ -86,4 +86,20 @@ class GameOfLife
     @grid = next_gen
   end
 
+  def print_grid(array)
+    array.each do |row|
+      p row
+    end
+    puts ''
+  end
+
 end
+
+game = GameOfLife.new
+seed_gen = game.random_seed(50)
+first_gen = game.next_gen
+second_gen = game.next_gen
+
+game.print_grid(seed_gen)
+game.print_grid(first_gen)
+game.print_grid(second_gen)
