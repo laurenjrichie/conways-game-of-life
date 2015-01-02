@@ -30,7 +30,7 @@ class GameOfLife
     @grid
   end
 
-  def neighbors(row, column)
+  def neighbors(row, column)   # deal with edge cases!!!
     neighbors = []
     top_left = @grid[row-1][column-1]
     top = @grid[row-1][column]

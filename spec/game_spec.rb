@@ -65,7 +65,7 @@ describe GameOfLife do
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
-      #   ["-", "-", "-", "-", "-", "O", "-", "-", "-", "-",],
+      #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "O", "O", "O", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "O", "-", "-", "-", "-",],
       #   ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-",],
@@ -75,6 +75,9 @@ describe GameOfLife do
       # ]
   end
 
+  it 'finding neighbors deals with edge cases'
+
+
   it 'any live cell with fewer than two live neighbors dies' do
     @game.custom_seed(4,4)
     @game.custom_seed(4,5)
@@ -82,11 +85,34 @@ describe GameOfLife do
     expect(@game.live_or_die?(4, 5)).to eq("die")
   end
 
-  it 'any live cell with more than three live neighbors dies'
+  it 'any live cell with more than three live neighbors dies' do
+    @game.custom_seed(4,4)
+    @game.custom_seed(4,5)
+    @game.custom_seed(5,4)
+    @game.custom_seed(5,5)
+    @game.custom_seed(6,5)
 
-  it 'any live cell with two or three live neighbors lives'
+    expect(@game.live_or_die?(5, 4)).to eq("die")
+  end
 
-  it 'any dead cell with exactly three live neighbors comes to life'
+  it 'any live cell with two or three live neighbors lives' do
+    @game.custom_seed(3,4)
+    @game.custom_seed(4,4)
+    @game.custom_seed(4,5)
+    @game.custom_seed(4,6)
+    @game.custom_seed(5,5)
+
+    expect(@game.live_or_die?(5, 5)).to eq("live")
+    expect(@game.live_or_die?(3, 4)).to eq("live")
+  end
+
+  it 'any dead cell with exactly three live neighbors comes to life' do
+    @game.custom_seed(4,4)
+    @game.custom_seed(4,5)
+    @game.custom_seed(5,5)
+
+    expect(@game.live_or_die?(5, 4)).to eq("live")
+  end
 
 
 end
