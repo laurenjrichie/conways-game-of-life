@@ -1,4 +1,4 @@
-require 'cell'
+require 'grid'  # issues with Cell in different file
 require 'spec_helper'
 
 describe Cell do

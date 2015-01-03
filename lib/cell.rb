@@ -1,3 +1,6 @@
+require_relative 'grid'
+
+module GameOfLife
 class Cell
   attr_accessor :status
 
@@ -15,4 +18,5 @@ class Cell
     self
   end
 
+end
 end
