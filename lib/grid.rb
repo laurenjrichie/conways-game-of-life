@@ -1,29 +1,15 @@
-class Cell
-  attr_accessor :status
-
-  def initialize
-    @status
-  end
-
-  def dead
-    @status = "dead"
-    self
-  end
-
-  def alive
-    @status = "alive"
-    self
-  end
-end
+require_relative 'cell'
 
 class Grid
   attr_reader :grid
 
-  def initialize
+  def initialize(rows, columns)
+    @rows = rows
+    @columns = columns
     @grid = []
-    10.times do
+    rows.times do
       row = []
-      10.times do
+      columns.times do
         row << Cell.new
       end
       @grid << row
@@ -46,7 +32,7 @@ class Grid
 
   def random_seed(live_cells)
     while number_alive < live_cells
-      row = rand(0..9)
+      row = rand(0..(@rows-1))
       @grid[row][0].alive
       @grid[row] = @grid[row].sort_by {rand}
     end
@@ -70,7 +56,7 @@ class Grid
     end
     left = @grid[row][column-1] unless column == 0
     right = @grid[row][column+1] unless column == 9
-    if row != 9
+    if row != 49
       bottom_left = @grid[row+1][column-1]
       bottom = @grid[row+1][column]
       bottom_right = @grid[row+1][column+1]
@@ -140,11 +126,13 @@ class Grid
 
 end
 
-game = Grid.new
-seed_gen = game.random_seed(50)
+game = Grid.new(50, 50)
+seed_gen = game.random_seed(250)
 first_gen = game.next_gen
 second_gen = game.next_gen
 
 game.print_grid(seed_gen)
+p "****************************"
 game.print_grid(first_gen)
+p "****************************"
 game.print_grid(second_gen)

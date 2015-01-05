@@ -1,4 +1,4 @@
-require 'grid'  # issues with Cell in different file
+require 'cell'
 require 'spec_helper'
 
 describe Cell do
@@ -7,10 +7,8 @@ describe Cell do
     cell_1 = Cell.new.dead
     cell_2 = Cell.new.alive
 
-    expect(cell_1.status).to eq("-")
-    expect(cell_2.status).to eq("O")
+    expect(cell_1.status).to eq("dead")
+    expect(cell_2.status).to eq("alive")
   end
-
-  it 'has a method to find all 8 neighbors'
 
 end

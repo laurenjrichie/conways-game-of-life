@@ -1,6 +1,3 @@
-require_relative 'grid'
-
-module GameOfLife
 class Cell
   attr_accessor :status
 
@@ -9,14 +6,12 @@ class Cell
   end
 
   def dead
-    @status = "-"
+    @status = "dead"
     self
   end
 
   def alive
-    @status = "O"
+    @status = "alive"
     self
   end
-
-end
 end
