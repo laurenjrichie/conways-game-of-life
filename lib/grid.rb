@@ -55,8 +55,8 @@ class Grid
       top_right = @grid[row-1][column+1]
     end
     left = @grid[row][column-1] unless column == 0
-    right = @grid[row][column+1] unless column == 9
-    if row != 49
+    right = @grid[row][column+1] unless column == (@columns-1)
+    if row != (@rows-1)
       bottom_left = @grid[row+1][column-1]
       bottom = @grid[row+1][column]
       bottom_right = @grid[row+1][column+1]
